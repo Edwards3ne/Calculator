@@ -1,8 +1,11 @@
 package com.restapp.service;
 
+import org.springframework.stereotype.Service;
 import org.tempuri.CalculatorSoap;
-
+@Service
 public class CalculatorService implements CalculatorSoap {
+    public CalculatorService() {
+    }
 
     @Override
     public int subtract(int intA, int intB) {

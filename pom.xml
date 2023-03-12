@@ -53,6 +53,23 @@
             <artifactId>cxf-core</artifactId>
             <version>${cxf.version}</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.aerospike</groupId>-->
+<!--            <artifactId>aerospike-client</artifactId>-->
+<!--            <version>6.0.0</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>com.aerospike</groupId>
+            <artifactId>spring-data-aerospike</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        
+<!--        <dependency>-->
+<!--            <groupId>com.aerospike</groupId>-->
+<!--            <artifactId>aerospike-reactor-client</artifactId>-->
+<!--            <version>5.0.7</version>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>

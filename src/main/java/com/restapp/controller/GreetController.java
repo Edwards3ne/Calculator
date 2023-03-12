@@ -1,24 +1,16 @@
 package com.restapp.controller;
 
 
+//import com.restapp.service.CalculatorService;
 import com.restapp.service.CalculatorService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.tempuri.Calculator;
-import org.tempuri.CalculatorSoap;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 
 @RestController
 public class GreetController {
-    CalculatorService calcService=new CalculatorService();
+    @Autowired
+    CalculatorService calcService;
     private Logger logger = Logger.getLogger(GreetController.class);
 
     @GetMapping("/greet/{name}")
