@@ -3,7 +3,11 @@ package com.restapp.models;
 import com.restapp.enums.CalcOperation;
 import org.springframework.data.aerospike.mapping.Document;
 import org.springframework.data.annotation.Id;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Document
+//@Data
 public class Calculation {
     @Id
     private int id;
@@ -11,6 +15,7 @@ public class Calculation {
     private Integer numB;
     private Integer result;
     private String comment;
+    private static final AtomicInteger count = new AtomicInteger(0);
 
     private CalcOperation method;
 
@@ -24,6 +29,14 @@ public class Calculation {
     }
 
     public Calculation() {
+    }
+
+    public Calculation(Integer numA, Integer numB, Integer result, CalcOperation method) {
+        this.numA = numA;
+        this.numB = numB;
+        this.result = result;
+        this.method = method;
+        this.id=count.incrementAndGet();
     }
 
     public Calculation(Integer numA, Integer numB, CalcOperation method) {
