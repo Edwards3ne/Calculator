@@ -1,6 +1,8 @@
 package com.restapp.service;
 
 import com.restapp.enums.CalcOperation;
+import com.restapp.exception.InvalidOperationException;
+import com.restapp.exception.RecordNotFoundException;
 import com.restapp.models.Calculation;
 import com.restapp.repository.AerospikeCalculationRepository;
 import org.springframework.stereotype.Service;
@@ -16,8 +18,8 @@ public class CalculationService {
         this.aerospikeCalculationRepository = aerospikeCalculationRepository;
     }
 
-    public Optional<Calculation> findCalcById(int id){
-        return aerospikeCalculationRepository.findById(id);
+    public Calculation getCalcById(int id){
+        return aerospikeCalculationRepository.getById(id);
     }
     public void addCalc(Calculation record){
         aerospikeCalculationRepository.save(record);
@@ -28,32 +30,19 @@ public class CalculationService {
     public List<Calculation> getAllCalc(){
         return aerospikeCalculationRepository.findAll();
     }
-    public void addComment(int id,String comment){
-        Optional<Calculation> calculation=aerospikeCalculationRepository.findById(id);
-        calculation.ifPresent(calculation1 -> calculation1.setComment(comment) );
-    }
-    public List<Calculation> getAllByMethod(String method){
-        CalcOperation operation;
-        switch (method.toLowerCase()){
-            case "multiply":
-                operation=CalcOperation.MULTIPLY;
-                break;
-            case "add":
-                operation=CalcOperation.ADD;
-                break;
-            case "divide":
-                operation=CalcOperation.DIVIDE;
-                break;
-            case "subtract":
-                operation=CalcOperation.SUBTRACT;
-                break;
-            default:
-                operation=null;
-                break;
+    public void addComment(int id,String comment) throws RecordNotFoundException {
+        Calculation calculation=aerospikeCalculationRepository.getById(id);
+        if(calculation!=null){
+            calculation.setComment(comment);
+            aerospikeCalculationRepository.save(calculation);
+        }else {
+            throw new RecordNotFoundException();
         }
-        return aerospikeCalculationRepository.findAllByMethod(operation);
     }
-    public void createAndSave(int a,int b,int result,CalcOperation operation){
+    public List<Calculation> getAllByOperation(String Operation) {
+        return aerospikeCalculationRepository.findAllByOperation(Operation);
+    }
+    public void createAndSave(int a,int b,int result,String operation){
         aerospikeCalculationRepository.save(new Calculation(a,b,result,operation));
     }
 

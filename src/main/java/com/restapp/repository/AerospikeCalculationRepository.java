@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface AerospikeCalculationRepository extends AerospikeRepository<Calculation, Integer>, CrudRepository<Calculation, Integer> {
     List<Calculation> findAll();
-    List<Calculation> findAllByMethod(CalcOperation method);
+    List<Calculation> findAllByOperation(String operation);
+    Calculation getById(int id);
 
 }

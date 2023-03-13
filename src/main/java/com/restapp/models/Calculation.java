@@ -17,32 +17,32 @@ public class Calculation {
     private String comment;
     private static final AtomicInteger count = new AtomicInteger(0);
 
-    private CalcOperation method;
+    private String operation;
 
-    public Calculation(int id, Integer numA, Integer numB, Integer result, String comment, CalcOperation method) {
+    public Calculation(int id, Integer numA, Integer numB, Integer result, String comment, String operation) {
         this.id = id;
         this.numA = numA;
         this.numB = numB;
         this.result = result;
         this.comment = comment;
-        this.method = method;
+        this.operation = operation;
     }
 
     public Calculation() {
     }
 
-    public Calculation(Integer numA, Integer numB, Integer result, CalcOperation method) {
+    public Calculation(Integer numA, Integer numB, Integer result, String operation) {
         this.numA = numA;
         this.numB = numB;
         this.result = result;
-        this.method = method;
+        this.operation = operation;
         this.id=count.incrementAndGet();
     }
 
-    public Calculation(Integer numA, Integer numB, CalcOperation method) {
+    public Calculation(Integer numA, Integer numB, String operation) {
         this.numA = numA;
         this.numB = numB;
-        this.method = method;
+        this.operation = operation;
     }
 
     public String getComment() {
@@ -85,11 +85,11 @@ public class Calculation {
         this.id = id;
     }
 
-    public CalcOperation getMethod() {
-        return method;
+    public String getMethod() {
+        return operation;
     }
 
-    public void setMethod(CalcOperation method) {
-        this.method = method;
+    public void setMethod(String method) {
+        this.operation = method;
     }
 }

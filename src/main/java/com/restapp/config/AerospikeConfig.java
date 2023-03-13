@@ -17,12 +17,12 @@ public class AerospikeConfig extends AbstractAerospikeDataConfiguration {
 //TODO vyměnit jméno tabulky atd. za proměné
     @Override
     protected Collection<Host> getHosts() {
-        return Collections.singleton(new Host("localhost", 3000));
+        return Collections.singleton(new Host(Properties.DB_SERVER_NAME, Properties.DB_SERVER_PORT));
     }
 
     @Override
     protected String nameSpace() {
-        return "test";
+        return Properties.DB_SERVER_NAMESPACE;
     }
     @Bean
     public AerospikeDataSettings aerospikeDataSettings() {
